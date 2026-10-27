@@ -2,7 +2,13 @@
 
 Asks for a target day and reports how many flowers bloom on that day,
 following the Fibonacci sequence (1, 1, 2, 3, 5, 8, ...).
+
+Usage:
+    python fibonacci_garden.py        (asks for the day)
+    python fibonacci_garden.py 10     (uses day 10 directly)
 """
+
+import sys
 
 
 def flowers_on_day(target_day: int) -> int:
@@ -36,7 +42,16 @@ def read_target_day() -> int:
 
 
 def main() -> None:
-    target_day = read_target_day()
+    if len(sys.argv) > 1:
+        try:
+            target_day = int(sys.argv[1])
+        except ValueError:
+            sys.exit("Day must be a whole number.")
+        if target_day < 1:
+            sys.exit("Day must be 1 or greater.")
+    else:
+        target_day = read_target_day()
+
     result = flowers_on_day(target_day)
     print(f"On day {target_day}: {result} flowers bloomed!")
 
