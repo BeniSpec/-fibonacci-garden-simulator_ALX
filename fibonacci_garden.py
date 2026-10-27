@@ -19,17 +19,24 @@ def flowers_on_day(target_day: int) -> int:
     return current_flowers
 
 
-def main() -> None:
+def read_target_day() -> int:
+    """Ask until the user enters a whole number of 1 or greater."""
     while True:
         try:
             target_day = int(input("How many days should the garden grow? "))
-            if target_day < 1:
-                print("Please enter a number 1 or greater.")
-                continue
-            break
         except ValueError:
             print("Please enter a whole number.")
+            continue
 
+        if target_day < 1:
+            print("Please enter a number 1 or greater.")
+            continue
+
+        return target_day
+
+
+def main() -> None:
+    target_day = read_target_day()
     result = flowers_on_day(target_day)
     print(f"On day {target_day}: {result} flowers bloomed!")
 
